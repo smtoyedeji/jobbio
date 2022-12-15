@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import useFetch from './useFetch'
+// import { FaAngleDoubleRight } from 'react-icons/fa'
 
+const url = 'https://course-api.com/react-tabs-project'
 function App() {
+  const { data } = useFetch(url)
+  
+  console.log(data)
+
+  const elements = data.map((element) => {
+    return (
+      <div key={element.id} className="section">
+        <h3>{element.company}</h3>
+        <h5>{element.title}</h5>
+        <ol>
+          <p>Duties</p>
+          <li>{element.duties[0]}</li>
+          <li>{element.duties[1]}</li>
+          <li>{element.duties[2]}</li>
+        </ol>
+      </div>
+    )
+  })
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {elements}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
